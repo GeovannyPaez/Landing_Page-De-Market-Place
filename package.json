@@ -1,0 +1,19 @@
+{
+  "name": "landing_page-de-market-place",
+  "version": "1.0.0",
+  "description": "''",
+  "main": "\u001b[D\u001bsrc\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeovannyPaez/Landing_Page-De-Market-Place.git"
+  },
+  "author": "Geovanny Paez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GeovannyPaez/Landing_Page-De-Market-Place/issues"
+  },
+  "homepage": "https://github.com/GeovannyPaez/Landing_Page-De-Market-Place#readme"
+}
