@@ -8,8 +8,10 @@
     const butnAddProductToCart= document.querySelector('.add-to-cart-button');
 
     const listaProductsDetail = document.querySelector('.list-product--detail');
+    const iconCloseLisproductDetail= document.querySelector('.title-container');
     const iconMobileMenu = document.querySelector('.icon_mobile-menu');
-    
+    const btnAceptAlert= document.querySelector('.btnAcceptAlert');
+    const alertBtnViewCar= document.querySelector('.alertBtnviewCar');
     const menuMobile= document.querySelector('.mobile-menu');
     const cardsContainer = document.querySelector('.cards-container');
     const productDetailImage = document.querySelector('.product-detail > img');
@@ -18,6 +20,7 @@
     const productDetailDescription= document.querySelector('#product-detail-description');
     const iconCloseProductDetail= document.querySelector('.product-detail-close');
     const asideProductDetail= document.querySelector('.product-detail');
+    const asideAlertAddProdutToCar= document.querySelector('.container-alert-AddToCar');
     
 
     
@@ -41,6 +44,7 @@
     // funcion para mostrar list de productos del carrito
     const toggleCarAside=()=>{
         listaProductsDetail.classList.toggle('inactive_listProductDetail');
+        asideAlertAddProdutToCar.classList.add('inactive');
         let isOpenMenuMobile = !menuMobile.classList.contains('inactive_mobile-menu');
 
         if(isOpenMenuMobile){
@@ -52,7 +56,9 @@
             productDetailInfoCard.classList.add('inactive');
         }
     }
-    
+    const closeListofCar=()=>{
+        listaProductsDetail.classList.toggle('inactive');
+    }
 
     function mostrar (item){
         item.addEventListener('click',()=>{
@@ -97,7 +103,7 @@
             productInfo.classList.add('product-info');
             const div = document.createElement('div');
             const pPrice= document.createElement('p')
-            pPrice.innerText= `${product.price}`;
+            pPrice.innerText= `$ ${product.price}`;
             div.appendChild(pPrice);
             const pName= document.createElement('p');
             pName.innerText= `${product.name}`;
@@ -149,9 +155,12 @@
         `;
         const lisOrdersProduct= document.querySelector('.my-order-content');
         const divShoppingCart = document.createElement('div');
+        const textNameProduct= asideAlertAddProdutToCar.querySelector('.container-alert span p');
         divShoppingCart.classList.add('shopping-cart');
         divShoppingCart.innerHTML= targetForCart;
         lisOrdersProduct.insertAdjacentElement('afterbegin',divShoppingCart);
+        textNameProduct.innerText=name;
+
         countProdusctInTheCar();
         priceTotalOfProductsInTheCar();
         deleteProducOfCar();
@@ -165,9 +174,14 @@
                 const idProduct= padreofButton.parentNode.getAttribute('id');
                     button.addEventListener('click',()=>{
                         const obj= listaProducts.find(p=>p.id == idProduct);
+                        viewAlertAddProductToCar();
                         añadirPorductoCarrito(obj.name,obj.price,obj.img);
+
                     });
             }
+    }
+    const viewAlertAddProductToCar=()=>{
+        asideAlertAddProdutToCar.classList.toggle('inactive');
     }
     addProductToCarOfProducts(ButtonsProductToCarOfProducts);
     butnAddProductToCart.addEventListener('click',addProductToCarAside);
@@ -215,12 +229,15 @@
 }
 
 
-
     // añadiendo eventos a nuestros a los elementos
     menuEmail.addEventListener('click',toggleDesktopMenu );
     iconMobileMenu.addEventListener('click',toggleMenuMobile);
     menuCarIcon.addEventListener('click',toggleCarAside);
+    iconCloseLisproductDetail.addEventListener('click',toggleCarAside);
     iconCloseProductDetail.addEventListener('click',closeProductDetail);
+    btnAceptAlert.addEventListener('click',viewAlertAddProductToCar);
+    alertBtnViewCar.addEventListener('click',toggleCarAside);
+    
     
     addEventImgViewProducDetail();
     

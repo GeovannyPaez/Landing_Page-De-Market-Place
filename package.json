@@ -4,7 +4,7 @@
   "description": "''",
   "main": "\u001b[D\u001bsrc\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "gh-pages -d src"
   },
   "repository": {
     "type": "git",
