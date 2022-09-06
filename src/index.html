@@ -7,15 +7,17 @@
   <title>Document</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./srcs/style.css">
+  <script defer type="module" src="./main.mjs"></script>
 </head>
 <body>
   <nav>
     <img src="./icons/icon_menu.svg" alt="" class="icon_mobile-menu">
     <div class="mobile-menu inactive_mobile-menu">
-      <ul>
+      <ul class="category-navbar--mobile">
         <li>
           <a href="/">CATEGORIES</a>
         </li>
@@ -23,7 +25,7 @@
           <a href="/">All</a>
         </li>
         <li>
-          <a href="/">Clothes</a>
+          <a href="http://127.0.0.1:5501/src/index.html#category=1/Clothes">Clothes</a>
         </li>
         <li>
           <a href="/">Electronics</a>
@@ -60,7 +62,7 @@
     <div class="navbar-left">
       <img src="./logos/logo_yard_sale.svg" alt="logo" class="logo">
 
-      <ul>
+      <ul class="category-navbar--desktop">
         <li>
           <a href="/">All</a>
         </li>
@@ -114,15 +116,18 @@
     </div>
 
     <div class="my-order-content">
-      <!-- <div class="shopping-cart">
-        <figure>
-          <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="bike">
-        </figure>
-        <p>Bike</p>
-        <p>$30,00</p>
-        <img src="./icons/icon_close.png" alt="close">
-      </div> -->
-
+      <div class="cart-orders">
+        <div class="shopping-cart">
+          <figure>
+            <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="bike">
+          </figure>
+          <p>Bike</p>
+          <p>$30,00</p>
+          <img src="./icons/icon_close.png" alt="close">
+        </div>
+  
+      </div>
+     
       <div class="order">
         <p>
           <span>Total</span>
@@ -140,7 +145,7 @@
     <div class="product-detail-close">
       <img src="./icons/icon_close.png" alt="close">
     </div>
-    <img>
+    <img class="product-detail--igm">
     <div class="product-info">
       <p id="product-detail-price"></p>
       <p id="product-detail-name"></p>
@@ -159,22 +164,66 @@
     </div>
 
   </aside>
-    <section class="main-container">
-      <div class="cards-container">
-        <!-- // <div class="product-card" id="961685">
-          //         <img src="https://assets.specialized.com/i/specialized/60821-104_HLMT_ALIGN-II-HLMT-MIPS-CE-BLK-BLKREFL-S-M_HERO?bg=rgb(241,241,241)&amp;w=1600&amp;h=900&amp;fmt=auto" alt="" class="imgProductCard">
-          //             <div class="product-info">
-          //                 <div>
-          //                     <p>$1200</p>
-          //                     <p>Bicycle helmet</p>
-          //                 </div>
-          //                 <figure>
-          //                     <img src="./icons/bt_add_to_cart.svg" alt="">
-          //                 </figure>
-          //             </div>
-          //     </div> -->
+  <section class="main-container">
+        <h2 class="main-title">Recommended</h2>
+        <div class="main-btn">
+          <button class="btnMostrarMas">Show More</button>
+        </div>
+      <div class="main-arrow--left main-arrow">
+        <i class='bx bx-chevrons-left bx-lg' style='color:#6dca79' ></i>
       </div>
+      <div class="cards-container">
+          <div class="product-card product-card--charge skeleton"></div>
+          <div class="product-card product-card--charge skeleton skeleton-delay" ></div>
+          <div class=" product-card product-card--charge skeleton" ></div>
+      </div>
+          
+        <div class="main-arrow--right main-arrow">
+          <i class='bx bx-chevrons-right bx-lg' style='color:#6dca79' ></i>
+        </div>
+  </section>
+  <section class="categories">
+      <h2 class="categories-title">Categories</h2>
+      <section class="categories-container">
+        <!-- <article class="categorie-card">
+          <h3 class="categorie-card--title">Clothes</h3>
+          <div class="categorie-card--img">
+            <img src="https://api.lorem.space/image/fashion?w=640&h=480&r=4283" alt="Clothes">
+          </div>
+          <button class="categorie-card--btn">Ver Productos</button>
+        </article> -->
+        <article class="categorie-card--charge skeleton"></article>
+        <article class="categorie-card skeleton skeleton-delay"></article>
+        <article class="categorie-card skeleton"></article>
+        <article class="categorie-card skeleton skeleton-delay"></article>
+      </section>
+  </section>
+  <section class="productosAll inactiveSection">
+    <div class="productosAll-headerArrow">
+      <i class='bx bxs-chevron-left bx-md' style='color: #6dca79'  ></i>
+    </div>
+    <div class="produtsAll-header--title">
+      <h2 class="header--title">Recommended</h2>
+    </div>
+    <section class="container-productsAll">
+      
     </section>
-  <script type="module" src="./main.mjs"></script>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-container--made">
+        <p>Made by @yuniorpaez_12</p>
+      </div>
+      <div class="footer-container--about">
+        <ul>
+          <li><a href="#"><i class='bx bxl-facebook bx-lg ' style='color:#ffffff'></i></a></li>
+          <li><a href="#"><i class='bx bxl-github bx-lg' style='color:#ffffff'></i></a></li>
+          <li><a href="#"><i class='bx bxl-instagram bx-lg' style='color:#ffffff'></i></a></li>
+        </ul>
+      </div>
+    </div>
+    
+  </footer>
 </body>
 </html>

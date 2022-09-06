@@ -1,72 +1,93 @@
-export class product {
-    constructor({
-        name,
-        id,
-        price,
-        img,
-        description,
-    }){
-        this.name = name,
-        this.id= id,
-        this.price= price,
-        this.img= img,
-        this.description= description
+const URL_API= 'https://api.escuelajs.co/api/v1/';
+import { renderProducts, renderCategories,renderProductDetail,renderProductToCar, renderCategoriesNavbar } from "./render.mjs";
+import { cardsContainer, containerCategories, btnMoreRecommended, sectionContainerAllProducts, containerOrdersCar,menuCarIcon } from "../main.mjs";
+
+export const getCategoriesAll=async()=>{
+    try {
+    const containerNavbarDesktop= document.querySelector('.category-navbar--desktop');
+    const containerNavbarMobile= document.querySelector('.category-navbar--mobile');    
+    const res = await fetch(URL_API+'categories');
+    const data = await res.json();
+        renderCategories(containerCategories,data);
+        renderCategoriesNavbar(containerNavbarDesktop,data);
+        renderCategoriesNavbar(containerNavbarMobile,data);
+
+    } catch (error) {
+        console.log(error)
     }
-    
-    
-   
 }
-//creamos nuevos productos
-const comutador= new product({
-    name:'Porttil Hp pavilion',
-    id: 6841563,
-    price: 1200,
-    img: 'https://th.bing.com/th/id/R.64e3e17f84c592313289c38103125892?rik=F26je4v5XKOAPA&pid=ImgRaw&r=0',
-    id:96161
-});
+ export const getProductsLimits=async()=>{
+    try {
+        const res = await fetch(`${URL_API}products?offset=0&limit=20`);
+    const data= await res.json();
+    renderProducts(cardsContainer,data);
+    } catch (error) {
+        console.log(error);
+    }
 
-const bici = new product({
-    name: 'Bicicleta BMW',
-    id: 87574,
-    price: 1000,
-    img:'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-})
-const bicicleHelmet= new product({
-    name:'Bicycle helmet',
-    price: 1200,
-    id:961685,
-    img: 'https://assets.specialized.com/i/specialized/60821-104_HLMT_ALIGN-II-HLMT-MIPS-CE-BLK-BLKREFL-S-M_HERO?bg=rgb(241,241,241)&w=1600&h=900&fmt=auto',
-    description: 'El mejor casco para tu para ir sacar tu bicicleta a cualquier lugar e ir simpre protegido'
-    });
-const seat= new product({
-    name:'Seat',
-    price: 300,
-    id:961985,
-    img: 'https://m.media-amazon.com/images/I/61e+sZ9rgNL._AC_SL1500_.jpg'
-});
-const tenisMontainBike= new product({
-    name:'Tennis Montain Bike',
-    price: 2200,
-    id:98412,
-    img: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8ea578f6c07847fca2d0ac85011d7f1f_9366/Tenis_para_Mountain_Bike_Five_Ten_Freerider_Negro_FW2835_01_standard.jpg'
-});
-const Sunglasses= new product({
-        name:'Sunglasses',
-        price: 800,
-        id:8542,
-        img: 'https://cdn.siroko.com/s/files/1/1220/6874/products/gafas-siroko-tech-k3s-london-lateral/1200x/crop_center.jpg?v=1635209602'
-});
-    const BicycleSetBag= new product({
-        name:'Bicycle seat bag',
-        price: 876,
-        id:8562,
-        img: 'https://m.media-amazon.com/images/I/81k2Gmal+VL._AC_SL1500_.jpg'
-});
-//añadimos los productos a un array y los exportamos para utilizarlos en nuestro archivo main.mjs
-export let listaProducts = [
-    bicicleHelmet,bici,BicycleSetBag,
-    Sunglasses,
-    tenisMontainBike,
-    seat,comutador
-]
+}
+export const getProductAll= async()=>{
+    try {
+        const res = await fetch(`${URL_API}products`);
+        const products = await res.json();
+        renderProducts(sectionContainerAllProducts,products);
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const getProductsByCategory=async(id)=>{
+    try {
+    
+        const res = await fetch(`${URL_API}categories/${id}/porducts`);
+        const products= await res.json();
+        renderProducts(sectionContainerAllProducts,products);
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+    
+export const getProductAlls= async(array)=>{
+    
+    try {
+        const res = await fetch(`${URL_API}products`);
+        const products = await res.json();
+        products.forEach(element => {
+            array.push(element);
+        });
+        // console.log(array)
+    } catch (error) {
+        console.log(error)
+    }
+};
+export const getOnlyProduct= async(id)=>{
+    try {
+        const containerProductDetail= document.querySelector('.product-detail');
+        const data = await fetch(`${URL_API}products/${id}`).then(res=>res.json());
+        // console.log(data);
+        renderProductDetail(data);
+        containerProductDetail.classList.remove('inactive');
+        
+    } catch (error) {
+        console.log(error);
+    }
 
+}
+export const getProductsOfCart= ()=>{
+    const countCar= menuCarIcon.lastElementChild;
+    const totalContainer= document.querySelector('.totalPriceProductOfTheCar');
+    const listOfProducts= JSON.parse(localStorage.getItem('products'));
+    const listaProductsArray= Object.values(listOfProducts);
+    const listprices= listaProductsArray.map(obj=>obj.price);
+    const total= listprices.reduce((a,b)=>{
+        return a+b
+    },0);
+    
+    renderProductToCar(containerOrdersCar,listaProductsArray);
+    countCar.textContent= listaProductsArray.length;
+    totalContainer.textContent=`$ ${total}.00`;
+}
+
+
+
+    
