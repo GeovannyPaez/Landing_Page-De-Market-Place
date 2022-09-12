@@ -20,7 +20,7 @@ export const getCategoriesAll=async()=>{
     try {
         const res = await fetch(`${URL_API}products?offset=0&limit=20`);
     const data= await res.json();
-    renderProducts(cardsContainer,data);
+    renderProducts(cardsContainer,data,false);
     } catch (error) {
         console.log(error);
     }
@@ -30,22 +30,22 @@ export const getProductAll= async()=>{
     try {
         const res = await fetch(`${URL_API}products`);
         const products = await res.json();
-        renderProducts(sectionContainerAllProducts,products);
+        renderProducts(sectionContainerAllProducts,products,true);
     } catch (error) {
         console.log(error)
     }
 }
-export const getProductsByCategory=async(id)=>{
-    try {
+// export const getProductsByCategory=async(id)=>{
+//     try {
     
-        const res = await fetch(`${URL_API}categories/${id}/porducts`);
-        const products= await res.json();
-        renderProducts(sectionContainerAllProducts,products);
+//         const res = await fetch(`${URL_API}categories/${id}/porducts`);
+//         const products= await res.json();
+//         renderProducts(sectionContainerAllProducts,products,{lazziLoading:true});
         
-    } catch (error) {
-        console.log(error)
-    }
-}
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
     
 export const getProductAlls= async(array)=>{
     
